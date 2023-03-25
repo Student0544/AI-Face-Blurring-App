@@ -1,0 +1,26 @@
+Caterev Robert
+Coty Ma
+Deliverable 2
+
+Problem Statement
+	
+Our project will be to train a neural network to recognize human heads, in an image or a video file. The video file will be deconstructed into its individual frames and the images will each pass through our model, before being reconstructed into a video file. We will be accomplishing that with the help of the OpenCV Python library. Furthermore, we will blurr the human heads in every image provided with OpenCV. The goal is to produce a model capable of blurring faces automatically, to conserve the privacy of the persons included in the given images. 
+
+Data Preprocessing
+	We will be using the Characterised Crowd Instance-level Human Parsing (CCIHP) dataset. Initially, we had 6 candidate datasets, but we have chosen this particular dataset because it has about 33 000 images that have many attributes and are well segmented.
+ The available labels are : Hat, Hair, Glove, Sunglasses, UpperClothes, FaceMask, Coat, Socks, Pants, Torso, Scarf, Skirt, Face, etc. There are more than 20 attributes related to body parts / clothing, 4 labels for size characterization, 4 labels for pattern characterization (Solid, Geometrical, Fancy, Letters ), and 12 labels for color characterization. 
+Evidently, we will not need the overwhelming majority of those labels, thus we will only keep the Face, Hair, and Hat labels from the body parts. We will keep these 3 labels to allow for a more accurate detection of a possible human face when the person in the picture is wearing a hat or is at an angle where only his hair/hat is visible.  We will also keep the size characterization and the color characterization labels in order to help our neural network develop a higher accuracy, since the input images will be colored, and the geometry of the human head has high variance.
+
+Machine Learning Model
+	We will use a Convolutional Neural Network. This is because our project specifically deals with images as inputs.
+We will mainly be using PyTorch to set up the Neural Network as well as their myriad of functions such as the Cross Entropy Loss Function. We will also be using PIL in order to process each image into a Tensor object with a label. We will also be using scikit learn in order to measure the performance of the model. We are still unsure about the number of convolution layers in the NN since we would like to avoid overfitting. As such, we are planning to have around 4 convolution and pooling layers. We are still unsure on how to organise the full connected layers as we haven’t been able to make it work yet.
+As for the training and validation test splits, since we took the face recognition dataset from another project, we simply kept their organisation and kept 28280 images as test images and 5000 validation images. For regularisation, we would like to add an L1 or L2 regularisation with a penalty term proportional to the scale of the weight. Since we have a lot of images, we believe that the penalty term doesn’t have to be very large. Since we would like to reduce processing time with our mediocre computers, we may treat each image in a gray scale. We will also limit the number of layers in the NN. Also, we will probably operate in large batch sizes such as around 100 given our large number of images. However, more research will definitely be needed here.
+We haven’t tested our model yet, so we do not know if it’s overfitting or underfitting. However, we do have a large set of validation images. So we will either train our model with parts of the training set, test it on the validation images, then adjust hyperparameters, or completely finish training the model then testing it on the validation images. We prefer the former despite the larger time requirements. 
+The biggest challenge we have right now is setting up the neural network along with the different convolution or pooling layers. Given a few more days, it should be able to come up. We have not solved these problems yet.
+
+Preliminary Results
+	Since we were not able to finish setting up the model till the due date, we were not able to extract any sort of measure for the performance.
+
+Next Steps
+	Obviously, the next step is to piece everything together in order to make the model functional. Our main obstacle was that we weren’t sure how to translate each image into a set of numbers usable by the Neural Network. This was quickly solved by deciding to turn every image into a gray scale and flattening all the pixel values into a one dimensional array (so a 100 x 100 pixels image would yield an array of 10 000 values). Doing so would indeed turn the images into usable data and keep the most important features of the image without increasing processing time too much.
+	Since we have around 30 000 images to work with, we decided to try and shorten the processing time by cutting corners where possible. In addition, we have also downloaded the original code of the people with the original dataset. So in the worst case scenario, we will just tweak around with it so that it specifically tracks the face, hat, and masks. 
