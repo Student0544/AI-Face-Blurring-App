@@ -16,8 +16,8 @@ def censor_img(file):
     model.eval()
 
     try:
-        # image = imdecode(file, IMREAD_COLOR)
-        image = imread(file)
+        image = imdecode(file, IMREAD_COLOR)
+        # image = imread(file)
         print("done")
         image = resize(image, (300, 300), interpolation=INTER_AREA)
 
@@ -53,12 +53,12 @@ def censor_img(file):
             blur = GaussianBlur(region, (31, 31), 0, 0)
             image[box[1]:box[3], box[0]:box[2]] = blur
 
-        imshow("First Edit", image)
-        waitKey(0)
-        destroyAllWindows()
-        # print("done")
-        # jpeg = imencode('.jpg', image)[1]
-        # return jpeg
+        # imshow("First Edit", image)
+        # waitKey(0)
+        # destroyAllWindows()
+        print("done")
+        jpeg = imencode('.jpg', image)[1]
+        return jpeg
 
     except:
         print("error")
