@@ -1,7 +1,6 @@
 import cv2
 import os
 import numpy as np
-from numpy import savetxt
 import csv
 
 
@@ -28,7 +27,7 @@ def vector(csv_file):
                 file.writerow(line)
 
 
-def find_coordinates(folder_path: str, margin: int, minimum: int, *target_colors: list, faces=5):
+def find_coordinates(folder_path: str, margin: int, minimum: int, *target_colors: list):
 
     """Returns a CSV file containing the coordinates corresponding to the colors' position. Each row corresponds to
     the position of one individual object, and a blank row means that it's the coordinates of the next image.
@@ -41,8 +40,8 @@ def find_coordinates(folder_path: str, margin: int, minimum: int, *target_colors
     # Directory
     input_folder = rf"{folder_path}"
     directory = os.path.basename(input_folder)
-    new_path = rf"{input_folder} head coordinates3\{directory} coordinates.csv"
-    os.makedirs(rf"{input_folder} head coordinates3", exist_ok=True)
+    new_path = rf"{input_folder} head coordinates\{directory} coordinates.csv"
+    os.makedirs(rf"{input_folder} head coordinates", exist_ok=True)
     #
 
     # Colors
@@ -109,7 +108,7 @@ def find_coordinates(folder_path: str, margin: int, minimum: int, *target_colors
 
                 obj.writerow([])
 
-            if img_name in os.listdir(input_folder)[0:4]:
+            if img_name in os.listdir(input_folder)[50:60]:
 
                 copy1 = image.copy()
                 copy2 = image.copy()
@@ -119,12 +118,12 @@ def find_coordinates(folder_path: str, margin: int, minimum: int, *target_colors
                 for coordinate in coordinates:
 
                     # cv2 takes ranges of pixels in the format of [yi:yf, xi:xf]
-                    region = copy1[coordinate[2]:coordinate[3], coordinate[0]:coordinate[1]]
+                    region = copy1[coordinate[1]:coordinate[3], coordinate[0]:coordinate[2]]
 
                     blur = cv2.GaussianBlur(region, (31, 31), 0, 0)
-                    copy1[coordinate[2]:coordinate[3], coordinate[0]:coordinate[1]] = blur
-                    copy2[coordinate[2]:coordinate[3], coordinate[0]:coordinate[1]] = [255, 255, 255]
-                    copy3[coordinate[2]:coordinate[3], coordinate[0]:coordinate[1]] = [255, 255, 255]
+                    copy1[coordinate[1]:coordinate[3], coordinate[0]:coordinate[2]] = blur
+                    copy2[coordinate[1]:coordinate[3], coordinate[0]:coordinate[2]] = [255, 255, 255]
+                    copy3[coordinate[1]:coordinate[3], coordinate[0]:coordinate[2]] = [255, 255, 255]
 
                 edit = cv2.hconcat([image, copy1, copy2, copy3])
 
@@ -141,7 +140,7 @@ def find_coordinates(folder_path: str, margin: int, minimum: int, *target_colors
         except ValueError:
             errors += 1
 
-    vector(new_path)
+    # vector(new_path)
 
     plural_noun = {True: "", False: "s"}[errors < 1]
     plural_verb = {True: "was", False: "were"}[errors < 1]
@@ -149,17 +148,12 @@ def find_coordinates(folder_path: str, margin: int, minimum: int, *target_colors
           f"{errors} image{plural_noun} {plural_verb} unsuccessfully processed.")
 
 
-hat_color = [16, 16, 16]
-hair_color = [31, 31, 31]
 face_color = [196, 196, 196]
 glasses_color = [61, 61, 61]
 margin_of_error = 0
 minimum_head_size = 40
 
-# find_coordinates(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\train_seg processed", margin_of_error, minimum_head_size,
-                 # face_color, glasses_color)
-find_coordinates(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_seg processed", margin_of_error, minimum_head_size,
-                  face_color, glasses_color)
 
-# vector(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\train_seg processed head coordinates3\train_seg processed coordinates.csv")
-# vector(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_seg processed head coordinates3\val_seg processed coordinates.csv")
+find_coordinates(r"path_to_image_folder_with_segmented_images_here", margin_of_error, minimum_head_size,
+                  face_color, glasses_color)
+vector(r"path_to_csv_file_created_from_the_above_here")
