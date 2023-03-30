@@ -1,6 +1,7 @@
 from google.colab import drive
 drive.mount('/content/drive/')
 
+# Download the relevant training images (300x300 dimensions) and the target coordinates in a csv file
 ! cp "/content/drive/MyDrive/CNN Data/train_img processed.zip" "/content"
 ! unzip "/content/train_img processed.zip"
 ! gdown --id 1bJxgF5NfBmz1WGVvYNvsEp59udSs78j5
@@ -17,8 +18,8 @@ device = device("cuda:0" if cuda.is_available() else "cpu")
 print(device)
 cuda.empty_cache()
 
-training_folder = "/content/train_img processed/"
-training_path = "/content/train_seg processed coordinates3.csv"
+training_folder = "path_to_training_images_here"
+training_path = "path_to_training_coordinates_file_here"
 
 
 def img_2_pixel(folder):
@@ -118,8 +119,7 @@ lr_scheduler = optim.lr_scheduler.StepLR(optimizer,
                                                step_size=3,
                                                gamma=0.1)
 
-# model.load_state_dict(load("/content/drive/MyDrive/CNN Data/CNNTotal.pth", map_location = 'cpu'))
-num_epochs = 10
+num_epochs = 19
 
 if cuda.is_available():
     model.cuda()
@@ -149,4 +149,4 @@ for epoch in range(num_epochs):
 print("done")
 
 # Save the trained model
-save(model.state_dict(), r'/content/drive/MyDrive/CNN Data/CNNFinal2.pth')
+save(model.state_dict(), r'path_where_you_want_to_save_weights')
