@@ -123,12 +123,12 @@ def get_area(coordinates:list):
     return total_area
 
 # Constant Variables
-validation = r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_img processed"
-targets_path = r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_seg processed head coordinates\val_seg processed coordinates.csv"
+validation = r"path_to_validation_image_folder_here"
+targets_path = r"path_to_target_coordinates_of_the_images_above_here"
 targets = csv_2_list(targets_path)
 images = listdir(validation)
 n = len(images)
-weights = r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\CNNAnchorBoxes19Epochs.pth"
+weights = r"path_to_weights_here"
 avg_ratio = 0
 avg_IoU = 0
 enclosed = 0
@@ -186,43 +186,3 @@ avg_IoU /= 5000
 enclosed /= 5000
 
 print(f'Average Ratio (Y/X): {avg_ratio}\nAverage IoU: {avg_IoU}\nAverage Rate of Strict Censoring: {enclosed}')
-
-# For 15 epochs and with the filtering conditions l_limit=0.1, u_limit=0.5, l_ratio=0.1, u_ratio=5, score=0.995:
-# Average Ratio (Y/X): 0.07821353863095591
-# Average IoU: 0.07862995652056522
-
-# For 19 epochs and with the filtering conditions l_limit=0.1, u_limit=0.5, l_ratio=0.1, u_ratio=5, score=0.995:
-# Average Ratio (Y/X): 0.08787385315027263
-# Average IoU: 0.09234938849012901 #########################
-
-# For 19 epochs and with the filtering conditions l_limit=0.2, u_limit=0.5, l_ratio=0.2, u_ratio=4, score=0.995:
-# Average Ratio (Y/X): 0.09718723855204958
-# Average IoU: 0.08174292542415573
-
-# For 19 epochs and with the filtering conditions l_limit=0.2, u_limit=0.5, l_ratio=0.2, u_ratio=4, score=0.999:
-# Average Ratio (Y/X): 0.09740714215741912
-# Average IoU: 0.08097548612791093
-
-# For 19 epochs and with the filtering conditions l_limit=0.5, u_limit=0.5, l_ratio=0.2, u_ratio=4, score=0.999:
-# Average Ratio (Y/X): 0.11296826527049357
-# Average IoU: 0.07634205659948738
-
-# For 19 epochs and with the filtering conditions l_limit=0.2, u_limit=0.5, l_ratio=0.33, u_ratio=4, score=0.99:
-# Average Ratio (Y/X): 0.10954418820244698
-# Average IoU: 0.09169371742169408
-
-# For 19 epochs and with the filtering conditions l_limit=0.1, u_limit=0.3, l_ratio=0.33, u_ratio=4, score=0.95:
-# Average Ratio (Y/X): 0.12822361113547323
-# Average IoU: 0.08849830920261967
-
-# For 19 epochs and with the filtering conditions l_limit=0.2, u_limit=0.4, l_ratio=0.33, u_ratio=4, score=0.99:
-# Average Ratio (Y/X): 0.11401385564617025
-# Average IoU: 0.07786791772677543
-
-# For 19 epochs and with the filtering conditions l_limit=0.2, u_limit=0.4, l_ratio=0.33, u_ratio=4, score=0.99:
-# Average Ratio (Y/X): 0.08806013062178857
-# Average IoU: 0.09155584745148633
-# Average Rate of Strict Censoring: 0.5274
-
-# For 19 epochs and with the filtering conditions l_limit=0.2, u_limit=0.4, l_ratio=0.33, u_ratio=4, score=0.999:
-#
