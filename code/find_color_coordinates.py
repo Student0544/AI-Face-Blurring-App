@@ -153,10 +153,6 @@ glasses_color = [61, 61, 61]
 margin_of_error = 0
 minimum_head_size = 40
 
-# find_coordinates(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\train_seg processed", margin_of_error, minimum_head_size,
-                 # face_color, glasses_color)
-find_coordinates(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_seg processed", margin_of_error, minimum_head_size,
+find_coordinates(r"path_to_segmented_image_folder_here", margin_of_error, minimum_head_size,
                   face_color, glasses_color)
-vector(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_seg processed head coordinates\val_seg processed coordinates.csv")
-# vector(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_seg processed head coordinates3\val_seg processed coordinates.csv")
-r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_seg processed head coordinates3\val_seg processed coordinates.csv"
+vector(r"path_to_new_csv_created_from_the_above_here")
