@@ -181,8 +181,8 @@ for image, target in zip(images, targets):
     elif not target:
         enclosed += 1
 
-avg_ratio /= 5000
-avg_IoU /= 5000
-enclosed /= 5000
+avg_ratio /= n
+avg_IoU /= n
+enclosed /= n
 
 print(f'Average Ratio (Y/X): {avg_ratio}\nAverage IoU: {avg_IoU}\nAverage Rate of Strict Censoring: {enclosed}')
