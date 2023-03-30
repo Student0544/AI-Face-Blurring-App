@@ -66,8 +66,8 @@ def process_image(image_path: str, new_height: int, new_width: int, brighten: fl
           f"{errors} image{plural_noun} {plural_verb} unsuccessfully processed.")
 
 
-input_folder1 = r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_img"
-input_folder2 = r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_seg"
+input_folder1 = r"path_to_normal_images_here"
+input_folder2 = r"path_to_segmented_images_corresponding_to_the_above_here"
 new_height = 300
 new_width = 300
 brighten_factor = 15
@@ -75,5 +75,5 @@ contrast_factor = 1
 
 # To process the images normally, run the first line below for the normal camera images, and run the second line for
 # the segmented images
-# process_image(input_folder1, new_height, new_width)
-# process_image(input_folder2, new_height, new_width, brighten=brighten_factor)
+process_image(input_folder1, new_height, new_width)
+process_image(input_folder2, new_height, new_width, brighten=brighten_factor)
