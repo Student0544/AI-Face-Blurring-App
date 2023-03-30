@@ -19,7 +19,7 @@ def censor_img(file, l_limit=0.1, u_limit=0.5, l_ratio=0.1, u_ratio=4, score=0.9
     model = fasterrcnn_mobilenet_v3_large_fpn(pretrained=True)
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
-    model.load_state_dict(load(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\CNNAnchorBoxes.pth", map_location=device("cpu")))
+    model.load_state_dict(load(r"path_to_weights_here", map_location=device("cpu")))
     model.eval()
     ########################################
 
@@ -93,7 +93,7 @@ def censor_video2(file, path, l_limit=0.3, u_limit=0.7, l_ratio=0.15, u_ratio=5,
     model = fasterrcnn_mobilenet_v3_large_fpn(pretrained=True)
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
-    model.load_state_dict(load(r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\CNNAnchorBoxes.pth", map_location=device("cpu")))
+    model.load_state_dict(load(r"path_to_weights_here", map_location=device("cpu")))
     model.eval()
     ###############################################
 
@@ -267,10 +267,10 @@ def censor_img_test(file, weights, l_limit=0.1, u_limit=0.5, l_ratio=0.1, u_rati
         return "An error occurred while processing your file."
 
 
-folder = r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\val_img"
+folder = r"path_to_images_here"
 
 if __name__ == "__main__":
-    weights = r"C:\Users\cotyl\OneDrive\Desktop\CCIHP_icip\CNNAnchorBoxes15Epochs.pth"
+    weights = r"path_to_weights_here"
     images = listdir(folder)
     for index in range(2000, 2100):
         censor_img_test(folder + rf"\{images[index]}", weights, l_limit=0.1, u_limit=0.45, l_ratio=0.75, u_ratio=4, score=0.995)
